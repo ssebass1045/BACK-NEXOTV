@@ -1,0 +1,231 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Subscription {
+  id: ID!
+  tipo: String!
+  price: Float!
+  users: [User!]!
+}
+
+type Support {
+  id: ID!
+  user: User!
+  fecha_solicitud: DateTime!
+  descripcion_problema: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Content {
+  id: ID!
+  title: String!
+  description: String!
+  image: String
+  duration: String!
+  category: [String!]!
+  type: Type
+  status: Status
+  contentUrl: [String!]!
+  viewingHistories: [ViewHistory!]
+}
+
+enum Type {
+  channel
+  movie
+  series
+}
+
+enum Status {
+  active
+  inactive
+}
+
+type ViewHistory {
+  id: ID!
+  user: User!
+  contenido: Content!
+  fecha_visualizacion: DateTime!
+}
+
+type User {
+  id: ID!
+  email: String!
+  firstName: String!
+  lastName: String!
+  views: [String!]
+  roles: [String!]!
+  isActive: Boolean!
+  subscription: Subscription!
+  viewingHistory: [ViewHistory!]!
+  favorites: [Float!]
+  support: [Support!]!
+}
+
+type Metrics {
+  id: ID!
+  cantidad_usuarios_registrados: Float!
+  cantidad_usuarios_premium: Float!
+  cantidad_usuarios_free: Float!
+}
+
+type AuthResponse {
+  token: String!
+  user: User!
+}
+
+type Query {
+  users(paginationArgs: PaginationArgs!, validRolesArgs: ValidRolesArgs!): [User!]!
+  user(id: String!): User!
+  metrics: [Metrics!]!
+  metric(id: Int!): Metrics!
+  viewHistory(id: Int!): ViewHistory!
+  supports: [Support!]!
+  support(id: String!): Support!
+  subscription(id: Int!): Subscription!
+  contentAll(paginationContentArgs: PaginationContentArgs!): [Content!]!
+  contentOne(id: String!): Content!
+  revalite: AuthResponse!
+}
+
+input PaginationArgs {
+  limit: Int
+  offset: Int
+}
+
+input ValidRolesArgs {
+  roles: [ValidRoles!] = []
+}
+
+enum ValidRoles {
+  admin
+  user
+  superUser
+}
+
+input PaginationContentArgs {
+  limit: Int
+  offset: Int
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: String!): String!
+  createMetric(createMetricInput: CreateMetricInput!): Metrics!
+  updateMetric(updateMetricInput: UpdateMetricInput!): Metrics!
+  removeMetric(id: Int!): Metrics!
+  createViewHistory(createViewHistoryInput: CreateViewHistoryInput!): ViewHistory!
+  updateViewHistory(updateViewHistoryInput: UpdateViewHistoryInput!): ViewHistory!
+  removeViewHistory(id: Int!): ViewHistory!
+  createSupport(createSupportInput: CreateSupportInput!): Support!
+  updateSupport(id: String!, updateSupportInput: UpdateSupportInput!): Support!
+  removeSupport(id: String!): Support!
+  createSubscription(createSubscriptionInput: CreateSubscriptionInput!): Subscription!
+  updateSubscription(updateSubscriptionInput: UpdateSubscriptionInput!): Subscription!
+  removeSubscription(id: Int!): Subscription!
+  createContent(createContentInput: CreateContentInput!): Content!
+  updateContent(updateContentInput: UpdateContentInput!): Content!
+  removeContent(id: String!): Content!
+  signup(signupInput: SignupInput!): AuthResponse!
+  login(loginInput: LoginInput!): AuthResponse!
+
+  """Ejecuta la construccion de la base de datos"""
+  executeSeed: Boolean!
+}
+
+input CreateUserInput {
+  email: String!
+  password: String!
+  firstName: String!
+  lastName: String!
+}
+
+input UpdateUserInput {
+  email: String
+  password: String
+  firstName: String
+  lastName: String
+  id: String!
+}
+
+input CreateMetricInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateMetricInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateViewHistoryInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateViewHistoryInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateSupportInput {
+  userId: String!
+  descripcion_problema: String!
+}
+
+input UpdateSupportInput {
+  userId: String
+  descripcion_problema: String!
+}
+
+input CreateSubscriptionInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateSubscriptionInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateContentInput {
+  title: String!
+  description: String!
+  image: String
+  duration: String!
+  category: [String!]!
+  type: Type
+  status: Status
+  contentUrl: [String!]!
+}
+
+input UpdateContentInput {
+  title: String
+  description: String
+  image: String
+  duration: String
+  category: [String!]
+  type: Type
+  status: Status
+  contentUrl: [String!]
+}
+
+input SignupInput {
+  email: String!
+  password: String!
+  firstName: String!
+  lastName: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
