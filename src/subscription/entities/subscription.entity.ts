@@ -2,10 +2,10 @@ import { ObjectType, Field, ID, Float } from '@nestjs/graphql';
 import { User } from 'src/users/entities/user.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-enum Tipo {
+export enum Tipo {
   Premium = 'premium',
   Basic = 'basic',
-  Free = 'free',
+  Family = 'family',
 }
 
 @ObjectType() // Decorador para convertir la clase en un tipo GraphQL

@@ -13,6 +13,7 @@ import { SubscriptionModule } from './subscription/subscription.module';
 import { ContentModule } from './content/content.module';
 import { AuthModule } from './auth/auth.module';
 import { SeedModule } from './seed/seed.module';
+import { StripeModule } from './stripe/stripe.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { SeedModule } from './seed/seed.module';
     ContentModule,
     AuthModule,
     SeedModule,
+    StripeModule
   ],
   controllers: [],
   providers: [],
