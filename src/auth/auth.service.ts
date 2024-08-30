@@ -9,12 +9,14 @@ import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { User } from 'src/users/entities/user.entity';
+import { EmailService } from '../email/email.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
+    private readonly emailService: EmailService,
   ) {}
 
   private getJwtToken(userId: string) {
@@ -24,7 +26,12 @@ export class AuthService {
   async signup(signupInput: SignupInput): Promise<AuthResponse> {
     const user = await this.usersService.create(signupInput);
     const token = this.getJwtToken(user.id);
-
+    // Enviar correo de registro
+    await this.emailService.sendMail(
+      user.email,
+      'Bienvenido a NexoTV',
+      `Hola ${user.firstName}, gracias por registrarte en nuestra plataforma.`
+    );
     return {
       token,
       user,
@@ -41,6 +48,12 @@ export class AuthService {
     }
 
     const token = this.getJwtToken(user.id);
+    // Enviar correo de login
+    await this.emailService.sendMail(
+      user.email,
+      'Bienvenido a NexoTV',
+      `Hola ${user.firstName}, iniciaste sesion exitosamente.`
+    );
 
     return {
       token,
