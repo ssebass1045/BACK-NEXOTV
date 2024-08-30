@@ -14,6 +14,7 @@ import { ContentModule } from './content/content.module';
 import { AuthModule } from './auth/auth.module';
 import { SeedModule } from './seed/seed.module';
 import { StripeModule } from './stripe/stripe.module';
+import { FilesModule } from './files/files.module';
 
 @Module({
   imports: [
@@ -42,7 +43,8 @@ import { StripeModule } from './stripe/stripe.module';
     ContentModule,
     AuthModule,
     SeedModule,
-    StripeModule
+    StripeModule,
+    FilesModule,
   ],
   controllers: [],
   providers: [],

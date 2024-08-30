@@ -7,10 +7,10 @@ dotenv.config();
 @Injectable()
 export class EmailService {
   private transporter = nodemailer.createTransport({
-    service: process.env.EMAIL_SERVICE, 
+    service: process.env.EMAIL_SERVICE,
     auth: {
-        user: process.env.EMAIL_USER,     
-        pass: process.env.EMAIL_PASSWORD,
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASSWORD,
     },
   });
 

@@ -30,7 +30,7 @@ export class AuthService {
     await this.emailService.sendMail(
       user.email,
       'Bienvenido a NexoTV',
-      `Hola ${user.firstName}, gracias por registrarte en nuestra plataforma.`
+      `Hola ${user.firstName}, gracias por registrarte en nuestra plataforma.`,
     );
     return {
       token,
@@ -52,7 +52,7 @@ export class AuthService {
     await this.emailService.sendMail(
       user.email,
       'Bienvenido a NexoTV',
-      `Hola ${user.firstName}, iniciaste sesion exitosamente.`
+      `Hola ${user.firstName}, iniciaste sesion exitosamente.`,
     );
 
     return {

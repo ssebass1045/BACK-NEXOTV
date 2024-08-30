@@ -26,7 +26,7 @@ import { EmailModule } from 'src/email/email.module';
       },
     }),
     UsersModule,
-    EmailModule
+    EmailModule,
   ],
   exports: [JwtStrategy, PassportModule, JwtModule],
 })
