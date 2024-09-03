@@ -15,9 +15,12 @@ import { AuthModule } from './auth/auth.module';
 import { SeedModule } from './seed/seed.module';
 import { StripeModule } from './stripe/stripe.module';
 import { FilesModule } from './files/files.module';
+import { EmailModule } from './email/email.module';
+import { AuthService } from './auth/auth.service';
 
 @Module({
   imports: [
+    EmailModule,
     ConfigModule.forRoot(),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
@@ -47,6 +50,6 @@ import { FilesModule } from './files/files.module';
     FilesModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [AuthService],
 })
 export class AppModule {}
